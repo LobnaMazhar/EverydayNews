@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Everyday news</string>
+    <string name="baseNewsURL">https://newsapi.org/v1/articles?source=the-next-web</string>
+</resources>
