@@ -8,6 +8,12 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 
 import com.example.lobna.news.Application.NewsApplication;
+import com.example.lobna.news.Cache.FileCache;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Lobna on 25-Jan-17.
@@ -35,5 +41,19 @@ public class Network {
             }
         });
         builder.show();
+    }
+
+    public static void downloadBitmap(String url, Context context) throws IOException {
+
+        HttpURLConnection urlConnection = null;
+        URL uri = new URL(url);
+        urlConnection = (HttpURLConnection) uri.openConnection();
+        int statusCode = urlConnection.getResponseCode();
+
+
+        InputStream inputStream = urlConnection.getInputStream();
+        if (inputStream != null) {
+            FileCache.saveFile(context, inputStream, String.valueOf(url.hashCode()));
+        }
     }
 }

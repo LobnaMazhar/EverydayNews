@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.lobna.news.Manager.ImageManager;
 import com.example.lobna.news.Model.News;
 import com.example.lobna.news.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,16 +49,18 @@ public class HomeAdapter extends ArrayAdapter<News>{
         News newsObject = news.get(position);
 
         viewHolder.titleTextView.setText(newsObject.getTitle());
-        Picasso.with(context).load(newsObject.getImageURL()).into(viewHolder.imageView);
+        ImageManager.getInstance().displayImage(context, viewHolder.imageView, newsObject.getImageURL(), viewHolder.newsImageProgessBar, ImageManager.FROM_INTERNET);
 
         return convertView;
     }
 
     public class ViewHolder{
+        ProgressBar newsImageProgessBar;
         ImageView imageView;
         TextView titleTextView;
 
         ViewHolder(View imagesList){
+            newsImageProgessBar = (ProgressBar) imagesList.findViewById(R.id.newsImageProgessBar);
             imageView = (ImageView) imagesList.findViewById(R.id.newsImageView);
             titleTextView = (TextView) imagesList.findViewById(R.id.newsTitleTextView);
         }

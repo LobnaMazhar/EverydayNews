@@ -1,15 +1,20 @@
 package com.example.lobna.news.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Lobna on 25-Jan-17.
  */
 
-public class News {
+public class News implements Parcelable {
     private String author;
     private String title;
     private String description;
     private String imageURL;
     private String publishedAt;
+
+    public News(){}
 
     public String getAuthor() {
         return author;
@@ -50,4 +55,39 @@ public class News {
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
+
+    protected News(Parcel in) {
+        author = in.readString();
+        title = in.readString();
+        description = in.readString();
+        imageURL = in.readString();
+        publishedAt = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(author);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(imageURL);
+        dest.writeString(publishedAt);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {
+        @Override
+        public News createFromParcel(Parcel in) {
+            return new News(in);
+        }
+
+        @Override
+        public News[] newArray(int size) {
+            return new News[size];
+        }
+    };
 }

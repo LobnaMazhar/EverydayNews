@@ -19,7 +19,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String' , 'API_KEY' , '"80862abde87348b185f7511d32b18389"'
+        it.buildConfigField 'String', 'API_KEY', '"80862abde87348b185f7511d32b18389"'
     }
 }
 
@@ -29,6 +29,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:design:25.0.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/picasso-2.5.2.jar')
+    compile 'com.android.support:palette-v7:25.0.0'
 }

@@ -6,9 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.lobna.news.Activity.HomeActivity;
+import com.example.lobna.news.Activity.DetailsActivity;
 import com.example.lobna.news.Adapter.HomeAdapter;
 import com.example.lobna.news.Listener.NewsListener;
 import com.example.lobna.news.Manager.NewsManager;
@@ -43,10 +44,18 @@ public class HomeFragment extends Fragment implements NewsListener {
     }
 
     @Override
-    public void onDownloadFinished(ArrayList<News> news) {
+    public void onDownloadFinished(final ArrayList<News> news) {
         newsAdapter = new HomeAdapter(getContext(), news);
         newsListView.setAdapter(newsAdapter);
 
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent goToDetailsActivity = new Intent(getActivity(), DetailsActivity.class);
+                goToDetailsActivity.putExtra("news", news.get(position));
+                startActivity(goToDetailsActivity);
+            }
+        });
     }
 
     @Override
