@@ -75,9 +75,6 @@ public class ImageManager {
         imageViews.put(imageView, url);
 
         queuePhoto(imageView, url, progressBar , type);
-
-        //put a default image on imageView
-        imageView.setImageResource(R.drawable.placeholder);
     }
 
     private void queuePhoto(ImageView imageView, String url, ProgressBar progressBar, int type) {
